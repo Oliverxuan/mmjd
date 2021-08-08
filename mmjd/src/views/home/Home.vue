@@ -22,17 +22,31 @@ import Scroll from "../../common/scroll/Scroll.vue";
 import Navbar from "../../components/common/navbar/Navbar.vue";
 import HomeSwiper from "./childComps/HomeSwiper.vue";
 
+import { getHomeMultidata } from "../../network/home";
+
 export default {
   name: "Home",
+  computed: {},
   data() {
     return {
       banners: []
     };
   },
+  created() {
+    this.getHomeMultidata();
+  },
   components: {
     Navbar,
     Scroll,
     HomeSwiper
+  },
+  methods: {
+    //swiper
+    getHomeMultidata() {
+      getHomeMultidata().then(res => {
+        this.banners = res.data.banner.list;
+      });
+    }
   }
 };
 </script>
