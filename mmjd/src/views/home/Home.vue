@@ -12,7 +12,7 @@
     </navbar>
     <div class="mar-top" />
     <scroll class="content" ref="scroll">
-      <home-swiper :banners="banners"></home-swiper>
+      <home-swiper></home-swiper>
     </scroll>
   </div>
 </template>
@@ -29,11 +29,11 @@ export default {
   computed: {},
   data() {
     return {
-      banners: []
+      // banners: []
     };
   },
   created() {
-    this.getHomeMultidata();
+    // this.getHomeMultidata();
   },
   components: {
     Navbar,
@@ -42,11 +42,11 @@ export default {
   },
   methods: {
     //swiper
-    getHomeMultidata() {
-      getHomeMultidata().then(res => {
-        this.banners = res.data.banner.list;
-      });
-    }
+    // getHomeMultidata() {
+    //   getHomeMultidata().then(res => {
+    //     this.banners = res.data;
+    //   });
+    // }
   }
 };
 </script>

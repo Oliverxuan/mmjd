@@ -2,7 +2,7 @@
   <swiper>
     <swiper-item v-for="(item, index) in banners" :key="index">
       <a :href="item.link">
-        <img :src="item.image" alt="" @load="imageLoad" />
+        <img :src="item.img" alt="" @load="imageLoad" />
       </a>
     </swiper-item>
   </swiper>
@@ -13,14 +13,6 @@ import { Swiper, SwiperItem } from "components/common/swiper";
 
 export default {
   name: "Homeswiper",
-  props: {
-    banners: {
-      type: Array,
-      default() {
-        return [];
-      }
-    }
-  },
   components: {
     Swiper,
     SwiperItem
@@ -30,7 +22,24 @@ export default {
 
   data() {
     return {
-      isLoad: false
+      isLoad: false,
+      banners: [
+        {
+          img:
+            "https://img.alicdn.com/imgextra/i4/2206761970875/O1CN01WBQCav1IKnFceu3y9_!!2206761970875.jpg_760x760Q90s50.jpg_.webp",
+          link: "http://m.tb.cn/h.faS7zTF?sm=eac805"
+        },
+        {
+          img:
+            "https://img.alicdn.com/imgextra/i4/2206761970875/O1CN01WBQCav1IKnFceu3y9_!!2206761970875.jpg_760x760Q90s50.jpg_.webp",
+          link: "http://m.tb.cn/h.faS7zTF?sm=eac805"
+        },
+        {
+          img:
+            "https://img.alicdn.com/imgextra/i4/2206761970875/O1CN01WBQCav1IKnFceu3y9_!!2206761970875.jpg_760x760Q90s50.jpg_.webp",
+          link: "http://m.tb.cn/h.faS7zTF?sm=eac805"
+        }
+      ]
     };
   },
 
