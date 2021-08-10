@@ -19,11 +19,7 @@
         />
         <div slot="item-text">测评</div>
       </tab-bar-item>
-      <tab-bar-item path="/add">
-        <img slot="item-icon" src="~assets/img/tabbar/add2.svg" alt="" />
-        <img slot="item-icon-active" src="~assets/img/tabbar/add.svg" alt="" />
-        <div slot="item-text">发表</div>
-      </tab-bar-item>
+
       <tab-bar-item path="/store">
         <img slot="item-icon" src="~assets/img/tabbar/shopcart.svg" alt="" />
         <img
@@ -31,7 +27,7 @@
           src="~assets/img/tabbar/shopcart_active.svg"
           alt=""
         />
-        <div slot="item-text">商店</div>
+        <div slot="item-text">种草</div>
       </tab-bar-item>
       <tab-bar-item path="/me">
         <img slot="item-icon" src="~assets/img/tabbar/profile.svg" alt="" />

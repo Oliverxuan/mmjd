@@ -14,10 +14,6 @@ export default {
 
   directives: {},
 
-  data() {
-    return {};
-  },
-
   mounted() {},
 
   methods: {}
