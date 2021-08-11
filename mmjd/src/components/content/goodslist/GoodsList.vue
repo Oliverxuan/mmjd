@@ -38,6 +38,5 @@ export default {
   flex-wrap: wrap;
   padding: 5px;
   justify-content: space-around;
-  background: rgba(185, 185, 185, 0.568);
 }
 </style>

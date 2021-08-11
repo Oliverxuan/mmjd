@@ -5,6 +5,7 @@ import Eva from "@/views/eva/Eva.vue";
 import Add from "@/views/add/Add.vue";
 import Me from "@/views/me/Me.vue";
 import Store from "@/views/store/Store.vue";
+import Goods from "@/views/goods/Goods.vue";
 
 Vue.use(VueRouter);
 
@@ -32,6 +33,10 @@ const routes = [
   {
     path: "/me",
     component: Me
+  },
+  {
+    path: "/goods/:id",
+    component: Goods
   }
 ];
 

@@ -49,12 +49,16 @@ export default {
 .left,
 .center,
 .right {
+  border-radius: 10px 10px 10px 10px;
   text-align: center;
   line-height: 50px;
   width: 32%;
   height: 50px;
   margin: 2.5px;
-  background: #ff999963;
+  background: #faababab;
+  -webkit-box-shadow: 0px 3px 3px #c8c8c8;
+  -moz-box-shadow: 0px 3px 3px #c8c8c8;
+  box-shadow: 0px 3px 3px #c8c8c8;
 
   font-size: 18px;
   display: block;

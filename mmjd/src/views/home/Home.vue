@@ -50,6 +50,7 @@ export default {
   created() {
     // this.getHomeMultidata();
     this.getGoodsList();
+    console.log(this.goods);
   },
   components: {
     Navbar,
@@ -59,22 +60,6 @@ export default {
     GoodsList
   },
   methods: {
-    //swiper
-    // getHomeMultidata() {
-    //   getHomeMultidata().then(res => {
-    //     this.banners = res.data;
-    //   });
-    // }
-    debance(func, delay) {
-      let timer = null;
-      return function(...args) {
-        if (timer) clearTimeout(timer);
-        timer = setTimeout(() => {
-          func.apply(this, args);
-        }, delay);
-      };
-    },
-
     getGoodsList() {
       axios({
         method: "get",
@@ -88,15 +73,6 @@ export default {
 </script>
 
 <style scoped>
-.home-nav-bar {
-  background: #ff9999;
-  /*原生滚动 
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  z-index: 9; */
-}
 /* .mar-top {
   height: 44px;
 } */
@@ -113,6 +89,5 @@ export default {
   font-size: 20px;
   width: 100%;
   padding: 5px;
-  background: rgb(223, 217, 217);
 }
 </style>
