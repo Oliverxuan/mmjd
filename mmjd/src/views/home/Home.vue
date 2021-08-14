@@ -17,7 +17,7 @@
       <!-- 首页快捷栏 -->
       <home-go></home-go>
       <!-- 个性推荐 -->
-      <div class="person">好 物 推 荐</div>
+      <div class="person">好 物 推 荐!</div>
       <!-- 商品展示列表 -->
       <goods-list :goods="goods"></goods-list>
     </scroll>
@@ -50,7 +50,6 @@ export default {
   created() {
     // this.getHomeMultidata();
     this.getGoodsList();
-    console.log(this.goods);
   },
   components: {
     Navbar,

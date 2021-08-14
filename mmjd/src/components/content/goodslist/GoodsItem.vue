@@ -44,10 +44,11 @@ export default {
 
 <style scoped>
 .goods-item {
-  padding-bottom: 40px;
+  padding-bottom: 50px;
   position: relative;
   width: 48%;
   margin-top: 10px;
+  margin-bottom: 5px;
   border-radius: 10px 10px 10px 10px;
   -webkit-box-shadow: 3px 3px 3px 2px #c8c8c8;
   -moz-box-shadow: 3px 3px 3px 2px #c8c8c8;
