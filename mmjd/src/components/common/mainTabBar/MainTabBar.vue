@@ -29,7 +29,7 @@
         />
         <div slot="item-text">种草</div>
       </tab-bar-item>
-      <tab-bar-item path="/me">
+      <tab-bar-item path="/profile">
         <img slot="item-icon" src="~assets/img/tabbar/profile.svg" alt="" />
         <img
           slot="item-icon-active"

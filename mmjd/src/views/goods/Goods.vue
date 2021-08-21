@@ -40,7 +40,7 @@
 <script>
 import Scroll from "../../common/scroll/Scroll.vue";
 import Navbar from "../../components/common/navbar/Navbar.vue";
-import { getGood } from "../../network/goods";
+import { getGoods } from "../../network/goods";
 export default {
   name: "Goods",
 
@@ -92,7 +92,7 @@ export default {
   },
   created() {
     this.id = this.$route.params.id;
-    getGood().then(res => {
+    getGoods().then(res => {
       this.good = res.data[this.id - 1];
     });
   },

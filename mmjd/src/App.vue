@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <keep-alive exclude="Goods">
-      <router-view />
-    </keep-alive>
+    <!-- <keep-alive exclude="Goods,Eva"> -->
+    <router-view />
+    <!-- </keep-alive> -->
     <main-tab-bar></main-tab-bar>
   </div>
 </template>

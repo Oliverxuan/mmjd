@@ -12,7 +12,7 @@
         class="glyphicon glyphicon-gift
 "
       ></span>
-      护肤品大全
+      护肤品推荐
     </div>
     <div class="right">
       <span class="glyphicon glyphicon-warning-sign"></span> 踩雷避坑

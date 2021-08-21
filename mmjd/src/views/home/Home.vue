@@ -6,7 +6,7 @@
         <span class="glyphicon glyphicon-heart-empty"></span>
       </div>
       <div class="nav-center" slot="center">面面俱到</div>
-      <div class="nac-right" slot="right">
+      <div class="nac-right" slot="right" @click="userClick">
         <span class="glyphicon glyphicon-user"></span>
       </div>
     </navbar>
@@ -17,7 +17,7 @@
       <!-- 首页快捷栏 -->
       <home-go></home-go>
       <!-- 个性推荐 -->
-      <div class="person">好 物 推 荐!</div>
+      <div class="person">好 物 推 荐</div>
       <!-- 商品展示列表 -->
       <goods-list :goods="goods"></goods-list>
     </scroll>
@@ -30,8 +30,7 @@ import Navbar from "../../components/common/navbar/Navbar.vue";
 import GoodsList from "../../components/content/goodslist/GoodsList.vue";
 import HomeGo from "./childComps/HomeGo.vue";
 import HomeSwiper from "./childComps/HomeSwiper.vue";
-
-import axios from "axios";
+import { getGoods } from "../../network/goods";
 
 export default {
   name: "Home",
@@ -60,12 +59,13 @@ export default {
   },
   methods: {
     getGoodsList() {
-      axios({
-        method: "get",
-        url: "http://121.5.114.161:3000/mmjd"
-      }).then(res => {
+      getGoods().then(res => {
         this.goods = res.data;
       });
+    },
+    userClick() {
+      console.log("user!");
+      this.$router.push("/login");
     }
   }
 };

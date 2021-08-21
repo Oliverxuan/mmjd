@@ -25,18 +25,19 @@ export default {
       isLoad: false,
       banners: [
         {
-          img:
-            "https://img.alicdn.com/imgextra/i4/2206761970875/O1CN01WBQCav1IKnFceu3y9_!!2206761970875.jpg_760x760Q90s50.jpg_.webp",
+          img: require("../../../assets/img/swiper/01.png"),
           link: "http://m.tb.cn/h.faS7zTF?sm=eac805"
         },
         {
-          img:
-            "https://img.alicdn.com/imgextra/i4/2206761970875/O1CN01WBQCav1IKnFceu3y9_!!2206761970875.jpg_760x760Q90s50.jpg_.webp",
+          img: require("../../../assets/img/swiper/02.png"),
           link: "http://m.tb.cn/h.faS7zTF?sm=eac805"
         },
         {
-          img:
-            "https://img.alicdn.com/imgextra/i4/2206761970875/O1CN01WBQCav1IKnFceu3y9_!!2206761970875.jpg_760x760Q90s50.jpg_.webp",
+          img: require("../../../assets/img/swiper/03.png"),
+          link: "http://m.tb.cn/h.faS7zTF?sm=eac805"
+        },
+        {
+          img: require("../../../assets/img/swiper/04.png"),
           link: "http://m.tb.cn/h.faS7zTF?sm=eac805"
         }
       ]
