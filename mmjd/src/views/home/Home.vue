@@ -2,13 +2,10 @@
   <div class="home">
     <!-- 首页导航栏 -->
     <navbar class="home-nav-bar">
-      <div class="nav-left" slot="left">
-        <span class="glyphicon glyphicon-heart-empty"></span>
-      </div>
       <div class="nav-center" slot="center">面面俱到</div>
-      <div class="nac-right" slot="right" @click="userClick">
+      <!-- <div class="nac-right" slot="right" @click="userClick">
         <span class="glyphicon glyphicon-user"></span>
-      </div>
+      </div> -->
     </navbar>
     <div class="mar-top" />
     <scroll class="content" ref="scroll">
@@ -17,7 +14,9 @@
       <!-- 首页快捷栏 -->
       <home-go></home-go>
       <!-- 个性推荐 -->
-      <div class="person">好 物 推 荐</div>
+      <div class="person">最 新 测 评</div>
+      <eva-item></eva-item>
+      <div class="person">个 性 推 荐</div>
       <!-- 商品展示列表 -->
       <goods-list :goods="goods"></goods-list>
     </scroll>
@@ -31,6 +30,7 @@ import GoodsList from "../../components/content/goodslist/GoodsList.vue";
 import HomeGo from "./childComps/HomeGo.vue";
 import HomeSwiper from "./childComps/HomeSwiper.vue";
 import { getGoods } from "../../network/goods";
+import EvaItem from "../eva/childComps/EvaItem.vue";
 
 export default {
   name: "Home",
@@ -50,12 +50,14 @@ export default {
     // this.getHomeMultidata();
     this.getGoodsList();
   },
+  beforeDestroy() {},
   components: {
     Navbar,
     Scroll,
     HomeSwiper,
     HomeGo,
-    GoodsList
+    GoodsList,
+    EvaItem
   },
   methods: {
     getGoodsList() {
@@ -64,17 +66,13 @@ export default {
       });
     },
     userClick() {
-      console.log("user!");
-      this.$router.push("/login");
+      this.$router.push("/profile");
     }
   }
 };
 </script>
 
 <style scoped>
-/* .mar-top {
-  height: 44px;
-} */
 .content {
   overflow: hidden;
   position: absolute;

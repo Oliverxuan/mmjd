@@ -1,21 +1,25 @@
 <template>
   <div id="home-go">
-    <div class="left">
+    <div class="left" @click="skinTestClick">
       <span
         class="glyphicon glyphicon-eye-open
 "
       ></span>
       肤质测评
     </div>
-    <div class="center">
+    <div class="center" @click="allGoodsClick">
       <span
-        class="glyphicon glyphicon-gift
+        class="glyphicon glyphicon-shopping-cart
+"
+      ></span>
+      护肤品大全
+    </div>
+    <div class="right" @click="persongoodsClick">
+      <span
+        class="glyphicon glyphicon-thumbs-up
 "
       ></span>
       护肤品推荐
-    </div>
-    <div class="right">
-      <span class="glyphicon glyphicon-warning-sign"></span> 踩雷避坑
     </div>
   </div>
 </template>
@@ -34,7 +38,17 @@ export default {
 
   mounted() {},
 
-  methods: {}
+  methods: {
+    skinTestClick() {
+      this.$router.push("/skintest");
+    },
+    allGoodsClick() {
+      this.$router.push("/allgoods");
+    },
+    persongoodsClick() {
+      this.$router.push("/persongoods");
+    }
+  }
 };
 </script>
 

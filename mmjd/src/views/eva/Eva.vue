@@ -1,14 +1,22 @@
 <template>
-  <div>
-    <h1 @click="btn">
-      Eva
-    </h1>
-    <h1 @click="nameClick">name:{{ name }}</h1>
+  <div id="eva">
+    <!-- 首页导航栏 -->
+    <navbar>
+      <div class="center" slot="center">测评</div>
+      <!-- <div class="right" slot="right">
+        <span class="glyphicon glyphicon-plus"></span>
+      </div> -->
+    </navbar>
+    <scroll class="content" ref="scroll">
+      <eva-item></eva-item>
+    </scroll>
   </div>
 </template>
 
 <script>
-import { moment } from "../../network/moment";
+import Scroll from "../../common/scroll/Scroll.vue";
+import Navbar from "../../components/common/navbar/Navbar.vue";
+import EvaItem from "./childComps/EvaItem.vue";
 export default {
   name: "Eva",
   data() {
@@ -17,28 +25,26 @@ export default {
     };
   },
   created() {},
-  components: {},
+  components: { Navbar, Scroll, EvaItem },
 
   directives: {},
 
-  mounted() {
-    this.nameClick();
-  },
+  mounted() {},
 
-  methods: {
-    btn() {
-      console.log("1123");
-      moment("123").then(res => {
-        console.log(res);
-      });
-    },
-    nameClick() {
-      console.log("1");
-      this.name = window.localStorage.getItem("userName");
-      console.log(this.name);
-    }
-  }
+  methods: {}
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+#eva {
+  background: rgb(43, 43, 43);
+}
+.content {
+  overflow: hidden;
+  position: absolute;
+  top: 44px;
+  bottom: 49px;
+  left: 0;
+  right: 0;
+}
+</style>

@@ -1,25 +1,40 @@
 <template>
-  <div class="normal-list">
-    <div v-for="(item, index) in listData" :key="index" class="item">
-      <list :list="item" />
+  <div>
+    <div @click="btnClick">
+      <span class="icon">
+        <img :src="iconURL(list)" alt="" />
+      </span>
+      <div class="info">{{ list.info }}</div>
     </div>
   </div>
 </template>
 
 <script>
-import List from "./List.vue";
 export default {
-  components: { List },
-  name: "NormalListView",
-  props: {
-    listData: {
-      type: Array,
-      default() {
-        return [];
-      }
-    }
+  name: "List",
+
+  components: {},
+
+  directives: {},
+
+  data() {
+    return {};
   },
-  methods: {}
+  props: {
+    list: {}
+  },
+
+  mounted() {},
+
+  methods: {
+    iconURL(list) {
+      return require("assets/img/profile/" + list.icon);
+    },
+    btnClick() {
+      console.log(this.list.info);
+      this.$router.push(this.list.url);
+    }
+  }
 };
 </script>
 

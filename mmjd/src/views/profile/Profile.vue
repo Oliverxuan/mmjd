@@ -35,13 +35,13 @@ export default {
   data() {
     return {
       orderList: [
-        { icon: "message.svg", info: "我的消息" },
-        { icon: "pointer.svg", info: "积分商城" },
-        { icon: "vip.svg", info: "会员卡" }
+        { icon: "message.svg", info: "我的评测", url: "/myeva" },
+        { icon: "star.svg", info: "我的种草", url: "/store" },
+        { icon: "skin.svg", info: "个人信息", url: "/MyInfo" }
       ],
       serviceList: [
-        { icon: "cart.svg", info: "我的购物车" },
-        { icon: "shopping.svg", info: "下载购物APP" }
+        { icon: "flow.svg", info: "技术栈", url: "/skill" },
+        { icon: "info.svg", info: "相关信息", url: "/info" }
       ]
     };
   },

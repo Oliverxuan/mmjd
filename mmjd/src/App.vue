@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <!-- <keep-alive exclude="Goods,Eva"> -->
-    <router-view />
-    <!-- </keep-alive> -->
+    <keep-alive include="Home">
+      <router-view />
+    </keep-alive>
     <main-tab-bar></main-tab-bar>
   </div>
 </template>
@@ -14,6 +14,12 @@ export default {
   name: "app",
   components: {
     MainTabBar
+  },
+  created() {
+    localStorage.removeItem("Authorization");
+    localStorage.removeItem("userName");
+    localStorage.removeItem("userId");
+    console.log("clear!");
   }
 };
 </script>

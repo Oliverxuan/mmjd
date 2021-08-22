@@ -2,13 +2,17 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "@/views/home/Home.vue";
 import Eva from "@/views/eva/Eva.vue";
-import Add from "@/views/add/Add.vue";
-import Me from "@/views/me/Me.vue";
 import Store from "@/views/store/Store.vue";
 import Goods from "@/views/goods/Goods.vue";
 import Login from "@/views/login/Login.vue";
-import IsLogin from "@/views/login/IsLogin.vue";
 import Profile from "@/views/profile/Profile.vue";
+import AllGoods from "@/views/person/AllGoods.vue";
+import Info from "@/views/person/Info.vue";
+import MyEva from "@/views/person/MyEva.vue";
+import MyInfo from "@/views/person/MyInfo.vue";
+import PersonGoods from "@/views/person/PersonGoods.vue";
+import Skill from "@/views/person/Skill.vue";
+import SkinTest from "@/views/person/SkinTest.vue";
 
 Vue.use(VueRouter);
 
@@ -26,17 +30,10 @@ const routes = [
     component: Eva
   },
   {
-    path: "/add",
-    component: Add
-  },
-  {
     path: "/store",
     component: Store
   },
-  {
-    path: "/me",
-    component: Me
-  },
+
   {
     path: "/goods/:id",
     component: Goods
@@ -45,13 +42,42 @@ const routes = [
     path: "/login",
     component: Login
   },
-  {
-    path: "/islogin",
-    component: IsLogin
-  },
+
   {
     path: "/profile",
     component: Profile
+  },
+  {
+    path: "/allgoods",
+    component: AllGoods
+  },
+  {
+    path: "/Info",
+    component: Info
+  },
+  {
+    path: "/myeva",
+    component: MyEva
+  },
+  {
+    path: "/myinfo",
+    component: MyInfo
+  },
+  // {
+  //   path: "/myinfo",
+  //   component: MyInfo
+  // },
+  {
+    path: "/persongoods",
+    component: PersonGoods
+  },
+  {
+    path: "/skill",
+    component: Skill
+  },
+  {
+    path: "/skintest",
+    component: SkinTest
   }
 ];
 
@@ -62,11 +88,12 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   let token = localStorage.getItem("Authorization");
+  if (token === "" || (token === null && to.path === "/skintest")) {
+    alert("请先登陆！");
+    next("/login");
+  }
 
   next();
-  // if (token != null && token != '' && to.path) {
-
-  // }
 
   // // if (to.path === "/login" || to.path === "/home" || to.path === "/") {
   // //   next();

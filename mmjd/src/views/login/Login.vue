@@ -61,14 +61,14 @@
               注册
             </button>
           </div>
-          <button
+          <!-- <button
             type="out"
             class="btn btn-default"
             id="logins3"
             @click="outClick"
           >
             注销
-          </button>
+          </button> -->
         </div>
       </form>
     </div>
@@ -122,8 +122,6 @@ export default {
       } else {
         login(this.username, this.password)
           .then(res => {
-            console.log(res.status);
-            console.log(res);
             this.userToken = "Bearer " + res.token;
             this.changeLogin({ Authorization: this.userToken });
             this.$router.push("/home");
@@ -132,6 +130,8 @@ export default {
             alert(`${this.username}欢迎回来`);
           })
           .catch(error => {
+            console.log(error);
+            console.log("123");
             alert("账号或密码错误！");
           });
       }
