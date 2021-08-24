@@ -9,11 +9,18 @@
       </div>
       <div class="center" slot="center">我的测评</div>
     </navbar>
+    <div class="content" v-for="(item, index) in contentes">
+      <div>{{ item.content }}</div>
+      <div>{{ item.name }}</div>
+      <div>{{ item.createAt }}</div>
+      <img class="img" :src="item.img" alt="" />
+    </div>
   </div>
 </template>
 
 <script>
 import Navbar from "../../components/common/navbar/Navbar.vue";
+import { GetUserMoment } from "../../network/moment";
 export default {
   name: "MyEva",
 
@@ -22,9 +29,16 @@ export default {
   },
 
   directives: {},
+  created() {
+    GetUserMoment().then(res => {
+      this.contentes = res;
+    });
+  },
 
   data() {
-    return {};
+    return {
+      contentes: []
+    };
   },
 
   mounted() {},
@@ -37,4 +51,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.img {
+  width: 20%;
+}
+</style>

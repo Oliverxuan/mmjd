@@ -18,7 +18,7 @@
 import Scroll from "../../common/scroll/Scroll.vue";
 import Navbar from "../../components/common/navbar/Navbar.vue";
 import GoodsList from "../../components/content/goodslist/GoodsList.vue";
-import { getGoods } from "../../network/goods";
+import { getGoods, getPersonGoods } from "../../network/goods";
 
 export default {
   name: "Persongoods",
@@ -52,10 +52,12 @@ export default {
         localStorage.getItem("userName") === ""
       ) {
         getGoods().then(res => {
-          this.goods = res.data;
+          this.goods = res;
         });
       } else {
-        console.log("geren1");
+        getPersonGoods().then(res => {
+          this.goods = res;
+        });
       }
     }
   }

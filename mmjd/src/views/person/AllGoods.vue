@@ -48,7 +48,7 @@ export default {
     },
     getGoodsList() {
       getGoods().then(res => {
-        this.goods = res.data;
+        this.goods = res;
       });
     }
   }

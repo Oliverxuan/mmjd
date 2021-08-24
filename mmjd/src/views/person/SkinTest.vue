@@ -84,6 +84,7 @@
 
 <script>
 import Navbar from "../../components/common/navbar/Navbar.vue";
+import { ChangeUserSkin } from "../../network/user";
 export default {
   name: "Skintest",
 
@@ -110,7 +111,33 @@ export default {
       this.$router.go(-1);
     },
     subClick() {
-      console.log(this.isflag);
+      let type, flag, fix;
+      if (this.isflag === "Y") {
+        flag = 1;
+      } else {
+        flag = 0;
+      }
+      if (this.high === "Y") {
+        type = "H";
+      } else if (this.middle === "Y") {
+        type = "M";
+      } else {
+        type = "low";
+      }
+      if (this.fix === "Y") {
+        fix = 1;
+      } else {
+        fix = 0;
+      }
+
+      ChangeUserSkin(flag, type, fix).then(res => {
+        if (res) {
+          alert("提交成功!");
+          this.$router.push("/home");
+        } else {
+          alert("提交失败！");
+        }
+      });
     }
   }
 };

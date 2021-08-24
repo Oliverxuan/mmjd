@@ -35,7 +35,6 @@ export default {
       this.$bus.$emit("itemImageLoad");
     },
     goodsClick() {
-      console.log(this.goodsItem.id);
       this.$router.push("/goods/" + this.goodsItem.id);
     }
   }

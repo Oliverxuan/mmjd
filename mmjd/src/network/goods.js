@@ -1,8 +1,29 @@
-import axios from "axios";
+import { request } from "./request";
 
 export function getGoods() {
-  return axios({
+  return request({
     method: "get",
-    url: "http://121.5.114.161:6901/mmjd"
+    url: "/mmjd"
+  });
+}
+export function getPersonGoods() {
+  return request({
+    method: "post",
+    url: "/mmjd/personimg"
+  });
+}
+export function getUserStore() {
+  return request({
+    method: "post",
+    url: "/users/store"
+  });
+}
+export function changeUserStore(id) {
+  return request({
+    method: "post",
+    url: "/users/changestore",
+    data: {
+      goodsId: id
+    }
   });
 }

@@ -61,14 +61,14 @@
               注册
             </button>
           </div>
-          <!-- <button
+          <button
             type="out"
             class="btn btn-default"
             id="logins3"
             @click="outClick"
           >
             注销
-          </button> -->
+          </button>
         </div>
       </form>
     </div>
@@ -97,7 +97,9 @@ export default {
     };
   },
 
-  mounted() {},
+  mounted() {
+    this.outClick();
+  },
 
   methods: {
     ...mapMutations(["changeLogin"]),
@@ -117,7 +119,13 @@ export default {
       }
     },
     submitClick() {
-      if (this.username === "" || this.password === "") {
+      if (
+        this.username === "" ||
+        this.password === ""
+        // ||
+        // this.username == null ||
+        // this.password == null
+      ) {
         alert("账号或密码不能为空！");
       } else {
         login(this.username, this.password)
@@ -126,23 +134,24 @@ export default {
             this.changeLogin({ Authorization: this.userToken });
             this.$router.push("/home");
             this.$store.commit("saveName", this.username);
-
             alert(`${this.username}欢迎回来`);
           })
           .catch(error => {
             console.log(error);
-            console.log("123");
+            console.log("error");
             alert("账号或密码错误！");
           });
       }
     },
     outClick() {
-      console.log("out");
-      localStorage.removeItem("Authorization");
-      localStorage.removeItem("userName");
-      localStorage.removeItem("userId");
-      alert("成功注销！");
-      this.$router.push("/");
+      // console.log("out");
+      // localStorage.removeItem("Authorization");
+      // localStorage.removeItem("userName");
+      // localStorage.removeItem("userId");
+      // alert("成功注销！");
+      // this.$router.push("/");
+      console.log(this.username);
+      console.log(this.password);
     }
   }
 };

@@ -14,7 +14,6 @@ export function request(config) {
       if (localStorage.getItem("Authorization")) {
         config.headers.Authorization = localStorage.getItem("Authorization");
       }
-      console.log("112");
 
       return config;
     },

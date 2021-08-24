@@ -32,6 +32,26 @@
           <div class="store"><a :href="good.url">推荐商家</a></div>
           <div class="price">RMB: {{ good.price }}</div>
         </div>
+        <!-- 发表用户评论 -->
+        <div class="moment">
+          <div>
+            发表评论:
+          </div>
+          <input class="contents" v-model="content" type="text" />
+          <button @click="contentClick">提交评论</button>
+        </div>
+        <!-- 获取评论 -->
+        <div class="getmoment">
+          <div>
+            获取评论
+          </div>
+          <div v-for="(item, index) in contentList" class="contentitem">
+            <div>评论: {{ item.content }}</div>
+            <div>用户：{{ item.name }}</div>
+            <div>时间：{{ item.createAt }}</div>
+          </div>
+        </div>
+        <div class="bottom"></div>
       </div>
     </scroll>
   </div>
@@ -40,7 +60,9 @@
 <script>
 import Scroll from "../../common/scroll/Scroll.vue";
 import Navbar from "../../components/common/navbar/Navbar.vue";
-import { getGoods } from "../../network/goods";
+import { changeUserStore, getGoods } from "../../network/goods";
+import { PostMoment, GetMoment } from "../../network/moment";
+
 export default {
   name: "Goods",
 
@@ -48,6 +70,7 @@ export default {
 
   directives: {},
   computed: {
+    userName() {},
     isFlag() {
       if (this.good.isflag == 1) {
         return "推荐";
@@ -87,18 +110,43 @@ export default {
       id: null,
       good: {},
       mis: "1",
-      add: true
+      add: true,
+      content: "",
+      contentList: []
     };
   },
   created() {
-    this.id = this.$route.params.id;
+    this.id = this.$route.params.id - 1;
     getGoods().then(res => {
-      this.good = res.data[this.id - 1];
+      this.good = res[this.id];
+    });
+    GetMoment(this.id).then(res => {
+      this.contentList = res;
     });
   },
   mounted() {},
 
   methods: {
+    contentClick() {
+      if (localStorage.getItem("userName")) {
+        if (this.content === "" || this.content === null) {
+          alert("不能发布空的评论哦");
+        } else {
+          PostMoment(this.content, this.id).then(res => {
+            if (res) {
+              GetMoment(this.id).then(res => {
+                this.contentList = res;
+              });
+              alert("发布评论成功！");
+            } else {
+              alert("发布失败！");
+            }
+          });
+        }
+      } else {
+        alert("请先登陆再发表评论！");
+      }
+    },
     back() {
       this.$router.go(-1);
     },
@@ -109,12 +157,18 @@ export default {
     },
     heartC() {
       this.add = !this.add;
+      changeUserStore(this.id + 1).then(res => {
+        return res;
+      });
     }
   }
 };
 </script>
 
 <style scoped>
+.bottom {
+  height: 50px;
+}
 #goods {
   /* background-color: rgba(207, 105, 176, 0.116); */
   background-color: rgba(54, 54, 53, 0.123);
@@ -130,7 +184,12 @@ export default {
   left: 0;
   right: 0;
 }
-
+.contents {
+  width: 100%;
+  height: 60px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
 .name {
   font-size: 25px;
   color: rgb(243, 59, 114);
@@ -194,5 +253,12 @@ export default {
 }
 .price {
   margin-left: 10px;
+}
+.getmoment {
+  background-color: rgb(166, 233, 245);
+}
+.contentitem {
+  margin-top: 10px;
+  background-color: #fff;
 }
 </style>
