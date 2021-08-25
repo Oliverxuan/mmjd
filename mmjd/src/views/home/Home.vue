@@ -15,7 +15,10 @@
       <home-go></home-go>
       <!-- 个性推荐 -->
       <div class="person">最 新 测 评</div>
-      <eva-item></eva-item>
+
+      <div v-for="item in contentList">
+        <eva-item :item="item"></eva-item>
+      </div>
       <div class="person">个 性 推 荐</div>
       <!-- 商品展示列表 -->
       <goods-list :goods="goods"></goods-list>
@@ -31,26 +34,42 @@ import HomeGo from "./childComps/HomeGo.vue";
 import HomeSwiper from "./childComps/HomeSwiper.vue";
 import { getGoods } from "../../network/goods";
 import EvaItem from "../eva/childComps/EvaItem.vue";
+import { GetNewMoment } from "../../network/moment";
 
 export default {
   name: "Home",
   computed: {},
   data() {
     return {
-      goods: []
+      goods: [],
+      contentList: [],
+      nums: "3"
     };
   },
 
   mounted() {
-    this.$bus.$on("itemImageLoad", () => {
+    // const refresh = debounce(this.$refs.scroll.scroll.refresh, 200);
+    // this.$bus.$on("itemImageLoad", () => {
+    //   console.log("!");
+    //   refresh();
+    // });
+    // this.$bus.$on("itemImageLoad", () => {
+    //   this.$refs.scroll.scroll.refresh();
+    //   console.log("!");
+    // });
+    setTimeout(() => {
       this.$refs.scroll.scroll.refresh();
-    });
+    }, 500);
   },
   created() {
     // this.getHomeMultidata();
     this.getGoodsList();
+
+    GetNewMoment(this.nums).then(res => {
+      console.log(res);
+      this.contentList = res;
+    });
   },
-  beforeDestroy() {},
   components: {
     Navbar,
     Scroll,
@@ -80,6 +99,7 @@ export default {
   bottom: 49px;
   left: 0;
   right: 0;
+  background-color: rgba(5, 5, 5, 0.041);
 }
 .person {
   text-align: center;

@@ -26,3 +26,21 @@ export function GetUserMoment() {
     method: "POST"
   });
 }
+export function GetAllMoment(nums) {
+  return request({
+    url: "/moment/all",
+    method: "POST",
+    data: {
+      nums: nums
+    }
+  });
+}
+export function GetNewMoment(nums) {
+  return request({
+    url: "/moment/new",
+    method: "POST",
+    data: {
+      nums: nums
+    }
+  });
+}

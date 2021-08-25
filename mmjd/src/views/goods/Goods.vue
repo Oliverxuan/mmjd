@@ -14,11 +14,11 @@
       <div class="info">
         <div class="title">
           <div id="star"></div>
-          <p class="name">{{ good.name }}</p>
-          <div id="star">
-            已有：{{ good.starts + 1 }} 位小伙伴已种草
+          <div class="tit">
+            <p class="name">{{ good.name }}</p>
             <span id="heart" :class="isActive" @click="heartC"></span>
           </div>
+          <div id="star">已有：{{ good.starts + 1 }} 位小伙伴已种草</div>
         </div>
         <div class="how">
           <div class="detil">
@@ -34,21 +34,17 @@
         </div>
         <!-- 发表用户评论 -->
         <div class="moment">
-          <div>
-            发表评论:
-          </div>
           <input class="contents" v-model="content" type="text" />
-          <button @click="contentClick">提交评论</button>
+          <button class="btn" @click="contentClick">提交评论</button>
         </div>
         <!-- 获取评论 -->
         <div class="getmoment">
-          <div>
-            获取评论
-          </div>
           <div v-for="(item, index) in contentList" class="contentitem">
-            <div>评论: {{ item.content }}</div>
-            <div>用户：{{ item.name }}</div>
-            <div>时间：{{ item.createAt }}</div>
+            <div class="infos">
+              <div class="us">{{ item.name }}:</div>
+              <div class="co">{{ item.content }}</div>
+            </div>
+            <div class="da">{{ dateFormat(item.createAt) }}</div>
           </div>
         </div>
         <div class="bottom"></div>
@@ -62,6 +58,7 @@ import Scroll from "../../common/scroll/Scroll.vue";
 import Navbar from "../../components/common/navbar/Navbar.vue";
 import { changeUserStore, getGoods } from "../../network/goods";
 import { PostMoment, GetMoment } from "../../network/moment";
+import { deleteCheck, downStore, getCheck, upStore } from "../../network/user";
 
 export default {
   name: "Goods",
@@ -97,7 +94,7 @@ export default {
       }
     },
     isActive() {
-      if (!this.add) {
+      if (this.add) {
         return "glyphicon glyphicon-heart";
       } else {
         return "glyphicon glyphicon-heart-empty";
@@ -107,26 +104,68 @@ export default {
 
   data() {
     return {
+      gid: null,
       id: null,
       good: {},
       mis: "1",
-      add: true,
+      add: false,
       content: "",
       contentList: []
     };
   },
   created() {
-    this.id = this.$route.params.id - 1;
+    this.gid = this.$route.params.id - 1;
+    this.id = this.gid + 1;
+    console.log(this.gid);
     getGoods().then(res => {
-      this.good = res[this.id];
+      this.good = res[this.gid];
     });
     GetMoment(this.id).then(res => {
       this.contentList = res;
+    });
+    getCheck(this.id).then(res => {
+      if (res[0]) {
+        this.add = true;
+      } else {
+        this.add = false;
+      }
     });
   },
   mounted() {},
 
   methods: {
+    dateFormat: function(time) {
+      var date = new Date(time);
+      var year = date.getFullYear();
+      /* 在日期格式中，月份是从0开始的，因此要加0
+       * 使用三元表达式在小于10的前面加0，以达到格式统一  如 09:11:05
+       * */
+      var month =
+        date.getMonth() + 1 < 10
+          ? "0" + (date.getMonth() + 1)
+          : date.getMonth() + 1;
+      var day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+      var hours =
+        date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+      var minutes =
+        date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+      var seconds =
+        date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+      // 拼接
+      return (
+        year +
+        "-" +
+        month +
+        "-" +
+        day +
+        " " +
+        hours +
+        ":" +
+        minutes +
+        ":" +
+        seconds
+      );
+    },
     contentClick() {
       if (localStorage.getItem("userName")) {
         if (this.content === "" || this.content === null) {
@@ -156,10 +195,18 @@ export default {
       }, 200);
     },
     heartC() {
+      if (this.add == false) {
+        upStore(this.id);
+        changeUserStore(this.id).then(res => {
+          return res;
+        });
+      } else {
+        downStore(this.id);
+        deleteCheck(this.id).then(res => {
+          return res;
+        });
+      }
       this.add = !this.add;
-      changeUserStore(this.id + 1).then(res => {
-        return res;
-      });
     }
   }
 };
@@ -184,47 +231,49 @@ export default {
   left: 0;
   right: 0;
 }
+
 .contents {
   width: 100%;
   height: 60px;
   margin-top: 10px;
   margin-bottom: 10px;
+  border-radius: 10px 10px 10px 10px;
 }
-.name {
-  font-size: 25px;
-  color: rgb(243, 59, 114);
-  padding-bottom: 0;
-  background: rgba(226, 102, 102, 0.198);
-  border-radius: 5px 5px 5px 5px;
+.moment {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  margin-top: 10px;
 }
+
 .title {
   padding: 0;
   margin: 0;
   padding-bottom: 10px;
 }
 .detil {
-  background: rgba(226, 102, 102, 0.198);
+  background: rgb(253, 253, 253);
   padding-bottom: 10px;
   font-size: 18px;
   border-radius: 5px 5px 0px 0px;
 }
 
 .buy {
-  background: rgba(226, 102, 102, 0.198);
+  background: rgb(253, 253, 253);
   border-radius: 5px 5px 5px 5px;
 
   display: flex;
   flex-direction: row;
 }
 .type {
-  background: rgba(226, 102, 102, 0.198);
+  background: rgb(253, 253, 253);
 
-  padding-bottom: 10px;
+  padding-bottom: 5px;
 }
 .flag {
-  background: rgba(226, 102, 102, 0.198);
+  background: rgb(253, 253, 253);
 
-  padding-bottom: 10px;
+  padding-bottom: 5px;
 }
 #heart {
   color: rgb(240, 65, 65);
@@ -237,12 +286,12 @@ export default {
   color: brown;
   font-size: 15px;
   font-weight: 300;
-  background: rgba(226, 102, 102, 0.198);
+  background: rgb(253, 253, 253);
   border-radius: 5px 5px 5px 5px;
 }
 .huse {
-  margin-bottom: 10px;
-  background: rgba(226, 102, 102, 0.198);
+  margin-bottom: 5px;
+  background: rgb(253, 253, 253);
   border-radius: 0px 0px 5px 5px;
 }
 .info {
@@ -254,11 +303,38 @@ export default {
 .price {
   margin-left: 10px;
 }
-.getmoment {
-  background-color: rgb(166, 233, 245);
-}
+
 .contentitem {
   margin-top: 10px;
+  padding: 5px;
   background-color: #fff;
+  border-radius: 10px 10px 10px 10px;
+}
+.tit {
+  display: flex;
+  width: 120%;
+}
+.name {
+  flex: 1;
+
+  font-size: 25px;
+  color: rgb(243, 59, 114);
+  padding-bottom: 0;
+  background: rgb(253, 253, 253);
+  border-radius: 5px 5px 5px 5px;
+}
+.infos {
+  display: flex;
+}
+.co {
+  margin-left: 8px;
+  font-weight: 350;
+}
+.us {
+  font-weight: 500;
+}
+.da {
+  font-size: 10px;
+  font-weight: 300;
 }
 </style>

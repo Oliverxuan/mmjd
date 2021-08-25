@@ -31,6 +31,13 @@ export function request(config) {
     },
     err => {
       console.log(err);
+      const { response } = err;
+      if ((response.status = 401)) {
+        localStorage.removeItem("Authorization");
+        localStorage.removeItem("userName");
+        localStorage.removeItem("userId");
+        alert("请登陆后再使用哦～");
+      }
     }
   );
 

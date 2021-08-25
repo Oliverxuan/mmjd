@@ -75,9 +75,9 @@
           ><input type="radio" v-model="fix" name="fix" value="N" />否</label
         >
       </div>
-    </div>
-    <div class="btn">
-      <button @click="subClick">提交</button>
+      <span class="btn">
+        <button @click="subClick">提交</button>
+      </span>
     </div>
   </div>
 </template>
@@ -144,34 +144,38 @@ export default {
 </script>
 
 <style scoped>
-.btn {
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
-}
 .btn button {
   font-size: 25px;
-  background: rgb(233, 233, 233);
+  font-weight: 300;
+  background: rgba(209, 209, 209, 0.329);
   border: 0;
   border-radius: 5px 5px 5px 5px;
 }
 .test {
-  background-color: rgba(133, 133, 133, 0.342);
+  padding-top: 10px;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.048);
 }
 .test div {
-  margin: 2px;
-
+  margin: 8px;
+  margin-top: 0;
   background-color: rgb(255, 255, 255);
+  border-radius: 10px 10px 10px 10px;
 }
 .test div div {
   padding-top: 20px;
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 500;
 }
 .test div label {
   margin: 10px;
   margin-top: 0;
-  font-size: 18px;
-  font-weight: 400;
+  font-size: 17px;
+  font-weight: 300;
+}
+.btn {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
 }
 </style>

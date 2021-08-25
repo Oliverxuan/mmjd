@@ -1,5 +1,6 @@
 <template>
   <div>
+    <div class="top"></div>
     <tab-bar>
       <tab-bar-item path="/home">
         <img slot="item-icon" src="~assets/img/tabbar/home.svg" alt="" />
@@ -62,4 +63,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.top {
+  height: 40px;
+}
+</style>

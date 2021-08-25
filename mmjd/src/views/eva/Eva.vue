@@ -3,29 +3,33 @@
     <!-- 首页导航栏 -->
     <navbar>
       <div class="center" slot="center">测评</div>
-      <!-- <div class="right" slot="right">
-        <span class="glyphicon glyphicon-plus"></span>
-      </div> -->
     </navbar>
-    <scroll class="content" ref="scroll">
-      <eva-item></eva-item>
-    </scroll>
+    <!-- 评论板块 -->
+    <div v-for="item in contentList">
+      <eva-item :item="item"></eva-item>
+    </div>
   </div>
 </template>
 
 <script>
-import Scroll from "../../common/scroll/Scroll.vue";
 import Navbar from "../../components/common/navbar/Navbar.vue";
 import EvaItem from "./childComps/EvaItem.vue";
+import { GetAllMoment } from "../../network/moment";
 export default {
   name: "Eva",
   data() {
     return {
-      name: ""
+      name: "",
+      contentList: [],
+      nums: 20
     };
   },
-  created() {},
-  components: { Navbar, Scroll, EvaItem },
+  created() {
+    GetAllMoment(this.nums).then(res => {
+      this.contentList = res;
+    });
+  },
+  components: { Navbar, EvaItem },
 
   directives: {},
 
@@ -37,7 +41,8 @@ export default {
 
 <style scoped>
 #eva {
-  background: rgb(43, 43, 43);
+  height: 100vh;
+  background-color: rgba(5, 5, 5, 0.082);
 }
 .content {
   overflow: hidden;

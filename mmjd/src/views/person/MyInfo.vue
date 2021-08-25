@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="mi">
     <!-- 导航栏 -->
     <navbar>
       <div class="left" slot="left">
@@ -12,10 +12,10 @@
     </navbar>
     <!-- 个人信息 -->
     <div class="info">
-      <div>用户名称：{{ user.name }}</div>
-      <div>肤质：{{ type }}</div>
-      <div>皮肤敏感程度：{{ isflag }}</div>
-      <div>皮肤状态：{{ fix }}</div>
+      <div class="name">用户名称：{{ user.name }}</div>
+      <div class="type">肤质：{{ type }}</div>
+      <div class="is">皮肤敏感程度：{{ isflag }}</div>
+      <div class="fix">皮肤状态：{{ fix }}</div>
     </div>
   </div>
 </template>
@@ -47,8 +47,10 @@ export default {
     isflag() {
       if (this.user.isflag === "0") {
         return "非敏感肌肤";
-      } else {
+      } else if (this.user.isflag === "0") {
         return "敏感肌肤";
+      } else {
+        return "";
       }
     },
     type() {
@@ -56,15 +58,19 @@ export default {
         return "油性皮肤";
       } else if (this.user.type === "M") {
         return "中性皮肤";
-      } else {
+      } else if (this.user.type === "low") {
         return "干性皮肤";
+      } else {
+        return "";
       }
     },
     fix() {
       if (this.user.fix === "0") {
         return "皮肤健康";
-      } else {
+      } else if (this.user.fix === "1") {
         return "皮肤损伤需要修复";
+      } else {
+        return "";
       }
     }
   },
@@ -89,4 +95,25 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.mi {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.157);
+  font-size: 20px;
+}
+.name {
+  margin: 20px;
+}
+.type {
+  margin: 20px;
+}
+.is {
+  margin: 20px;
+}
+.fix {
+  margin: 20px;
+}
+</style>

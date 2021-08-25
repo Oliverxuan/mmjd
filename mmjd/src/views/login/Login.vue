@@ -13,7 +13,7 @@
           <label for="inputEmail3" class="col-sm-2 control-label">用户名</label>
           <div class="col-sm-10">
             <input
-              type="name"
+              type="text"
               class="form-control"
               id="inputEmail3"
               placeholder="UserName"
@@ -45,30 +45,28 @@
         <div class="form-group">
           <div class="col-sm-offset-2 col-sm-10">
             <button
-              type="submit"
               class="btn btn-default"
               id="logins"
-              @click="submitClick"
+              @click.prevent="submitClick"
             >
               登陆
             </button>
             <button
-              type="register"
               class="btn btn-default"
               id="logins2"
-              @click="registerCilck"
+              @click.prevent="registerCilck"
             >
               注册
             </button>
           </div>
-          <button
+          <!-- <button
             type="out"
             class="btn btn-default"
             id="logins3"
             @click="outClick"
           >
             注销
-          </button>
+          </button> -->
         </div>
       </form>
     </div>
@@ -96,21 +94,22 @@ export default {
       userToken: ""
     };
   },
-
+  created() {},
   mounted() {
+    localStorage.removeItem("Authorization");
+    localStorage.removeItem("userName");
+    localStorage.removeItem("userId");
     this.outClick();
   },
 
   methods: {
     ...mapMutations(["changeLogin"]),
     registerCilck() {
-      console.log("register");
       if (this.username === "" || this.password === "") {
         alert("账号或密码不能为空！");
       } else {
         register(this.username, this.password).then(res => {
           if (res) {
-            console.log(res);
             alert("注册成功！");
           } else {
             alert("注册失败！");
@@ -119,13 +118,7 @@ export default {
       }
     },
     submitClick() {
-      if (
-        this.username === "" ||
-        this.password === ""
-        // ||
-        // this.username == null ||
-        // this.password == null
-      ) {
+      if (this.username === "" || this.password === "") {
         alert("账号或密码不能为空！");
       } else {
         login(this.username, this.password)
@@ -138,7 +131,6 @@ export default {
           })
           .catch(error => {
             console.log(error);
-            console.log("error");
             alert("账号或密码错误！");
           });
       }
@@ -150,8 +142,8 @@ export default {
       // localStorage.removeItem("userId");
       // alert("成功注销！");
       // this.$router.push("/");
-      console.log(this.username);
-      console.log(this.password);
+      // console.log(this.username);
+      // console.log(this.password);
     }
   }
 };

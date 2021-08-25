@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="me">
     <navbar>
       <div class="left" slot="left">
         <span
@@ -9,11 +9,8 @@
       </div>
       <div class="center" slot="center">我的测评</div>
     </navbar>
-    <div class="content" v-for="(item, index) in contentes">
-      <div>{{ item.content }}</div>
-      <div>{{ item.name }}</div>
-      <div>{{ item.createAt }}</div>
-      <img class="img" :src="item.img" alt="" />
+    <div v-for="item in contentes">
+      <eva-item :item="item"></eva-item>
     </div>
   </div>
 </template>
@@ -21,16 +18,19 @@
 <script>
 import Navbar from "../../components/common/navbar/Navbar.vue";
 import { GetUserMoment } from "../../network/moment";
+import EvaItem from "../eva/childComps/EvaItem.vue";
 export default {
   name: "MyEva",
 
   components: {
-    Navbar
+    Navbar,
+    EvaItem
   },
 
   directives: {},
   created() {
     GetUserMoment().then(res => {
+      console.log(res);
       this.contentes = res;
     });
   },
@@ -52,6 +52,10 @@ export default {
 </script>
 
 <style scoped>
+.me {
+  height: 100vh;
+  background-color: rgba(54, 54, 53, 0.123);
+}
 .img {
   width: 20%;
 }

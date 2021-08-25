@@ -69,7 +69,7 @@ export default {
   width: 32%;
   height: 50px;
   margin: 2.5px;
-  background: #faababab;
+  background: #faabab65;
   -webkit-box-shadow: 0px 3px 3px #c8c8c8;
   -moz-box-shadow: 0px 3px 3px #c8c8c8;
   box-shadow: 0px 3px 3px #c8c8c8;

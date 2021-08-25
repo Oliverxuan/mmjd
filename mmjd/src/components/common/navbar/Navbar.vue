@@ -1,8 +1,11 @@
 <template>
-  <div id="nav-bar">
-    <div class="left"><slot name="left"></slot></div>
-    <div class="center"><slot name="center"></slot></div>
-    <div class="right"><slot name="right"></slot></div>
+  <div>
+    <div id="nav-bar" class="nav">
+      <div class="left"><slot name="left"></slot></div>
+      <div class="center"><slot name="center"></slot></div>
+      <div class="right"><slot name="right"></slot></div>
+    </div>
+    <div class="bo"></div>
   </div>
 </template>
 
@@ -25,6 +28,13 @@ export default {
 </script>
 
 <style scoped>
+.nav {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  z-index: 9;
+}
 #nav-bar {
   background: #ff9999;
   display: flex;
@@ -41,5 +51,8 @@ export default {
 .center {
   flex: 1;
   font-weight: 300;
+}
+.bo {
+  height: 44px;
 }
 </style>
